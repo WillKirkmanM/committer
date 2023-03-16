@@ -5,5 +5,9 @@ import (
 )
 
 func Commit() {
-	fmt.Println("Commit func called")
+	commitType := GetCommitType()
+	scope := GetScope()
+	message := GetCommitMessage()
+
+	fmt.Println(commitType, scope, message)
 }
