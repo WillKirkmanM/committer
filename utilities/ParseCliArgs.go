@@ -6,10 +6,30 @@ import (
 )
 
 func ParseCliArgs() {
+	res := ValidateArgs()
+
+	if res == true {
+		fmt.Println("All Args are Correct!")
+	}
+}
+
+func ValidateArgs() (result bool) {
+	hasMessage := false
+	hasScope := false
+
 	for key, value := range ListArgs() {
+
+		if key == "-m" || key == "--message" {
+			hasMessage = true
+		}
+		if key == "-s" || key == "--scope" {
+			hasScope = true
+		}
+
 		fmt.Println("Key:", key)
 		fmt.Println("Value:", value)
 	}
+	return hasMessage == hasScope
 }
 
 func ListArgs() map[string]string {
