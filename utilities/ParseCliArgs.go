@@ -5,12 +5,31 @@ import (
 	"os"
 )
 
-func ParseCliArgs() {
-	res := ValidateArgs()
-
-	if res == true {
+func ParseCliArgs() (messsage string, scope string) {
+	if ValidateArgs() == true {
 		fmt.Println("All Args are Correct!")
+		args := ListArgs()
+
+		var message string
+		var scope string
+
+		if v, ok := args["-m"]; ok {
+			message = v
+		}
+		if v, ok := args["--message"]; ok {
+			message = v
+		}
+
+		if v, ok := args["-s"]; ok {
+			scope = v
+		}
+		if v, ok := args["--scope"]; ok {
+			scope = v
+		}
+
+		return message, scope
 	}
+	return "", ""
 }
 
 func ValidateArgs() (result bool) {
@@ -29,7 +48,7 @@ func ValidateArgs() (result bool) {
 		fmt.Println("Key:", key)
 		fmt.Println("Value:", value)
 	}
-	return hasMessage == hasScope
+	return hasMessage == true && hasScope == true
 }
 
 func ListArgs() map[string]string {
