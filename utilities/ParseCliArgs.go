@@ -19,8 +19,8 @@ func ListArgs() map[string]string {
 	for index := range ArgsArray {
 		firstCharacter := string([]rune(ArgsArray[index])[0:1])
 
-		if firstCharacter == "-" && len(ArgsArray[index]) <= 2 {
-			afterCharacter := string([]rune(ArgsArray[index])[1:2])
+		if firstCharacter == "-" {
+			wordAfter := string([]rune(ArgsArray[index]))
 
 			index = index + 1
 			for word := range ArgsArray[index:] {
@@ -29,7 +29,7 @@ func ListArgs() map[string]string {
 					break
 				}
 				// fmt.Println(ArgsArray[index:])
-				resultMap[afterCharacter] += ArgsArray[index:][word] + " "
+				resultMap[wordAfter] += ArgsArray[index:][word] + " "
 			}
 		}
 	}
