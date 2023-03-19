@@ -1,16 +1,16 @@
 package utilities
 
 import (
-// "fmt"
+	"fmt"
+	"log"
 )
 
 func Commit() {
-	ParseCliArgs()
-	/*
-		commitType := GetCommitType()
-		scope := GetScope()
-		message := GetCommitMessage()
+	message, scope, err := ParseCliArgs()
+	if err != nil {
+		log.Fatal(err)
+	}
 
-		fmt.Println(commitType, scope, message)
-	*/
+	fmt.Println("Scope & Message")
+	fmt.Println(scope, message)
 }
