@@ -5,7 +5,15 @@ import (
 	"os"
 )
 
-func ParseCliArgs() (messsage string, scope string) {
+func ParseCliArgs() (messsage string, scope string, error error) {
+	if len(os.Args) <= 1 {
+		// commitType := GetCommitType()
+		scope := GetScope()
+		message := GetCommitMessage()
+
+		return message, scope, nil
+	}
+
 	if ValidateArgs() == true {
 		fmt.Println("All Args are Correct!")
 		args := ListArgs()
@@ -27,16 +35,16 @@ func ParseCliArgs() (messsage string, scope string) {
 			scope = v
 		}
 
-		return message, scope
+		return message, scope, nil
 	}
-	return "", ""
+	return "", "", fmt.Errorf("Missing Arguments!")
 }
 
 func ValidateArgs() (result bool) {
 	hasMessage := false
 	hasScope := false
 
-	for key, value := range ListArgs() {
+	for key := range ListArgs() {
 
 		if key == "-m" || key == "--message" {
 			hasMessage = true
@@ -44,9 +52,6 @@ func ValidateArgs() (result bool) {
 		if key == "-s" || key == "--scope" {
 			hasScope = true
 		}
-
-		fmt.Println("Key:", key)
-		fmt.Println("Value:", value)
 	}
 	return hasMessage == true && hasScope == true
 }
