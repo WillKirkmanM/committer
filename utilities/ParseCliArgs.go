@@ -37,7 +37,7 @@ func ParseCliArgs() (messsage string, scope string, error error) {
 
 		return message, scope, nil
 	}
-	return "", "", fmt.Errorf("Missing Arguments!")
+	return "", "", fmt.Errorf("Missing Arguments!") // TODO: Show what arguments need to be provided
 }
 
 func ValidateArgs() (result bool) {
@@ -46,12 +46,18 @@ func ValidateArgs() (result bool) {
 
 	for key := range ListArgs() {
 
-		if key == "-m" || key == "--message" {
+		switch key {
+		case "-m":
 			hasMessage = true
-		}
-		if key == "-s" || key == "--scope" {
+		case "--message":
+			hasMessage = true
+
+		case "-s":
+			hasScope = true
+		case "--scope":
 			hasScope = true
 		}
+
 	}
 	return hasMessage == true && hasScope == true
 }
