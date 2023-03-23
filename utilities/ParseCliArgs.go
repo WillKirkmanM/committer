@@ -5,21 +5,29 @@ import (
 	"os"
 )
 
-func ParseCliArgs() (messsage string, scope string, error error) {
+func ParseCliArgs() (commitType string, messsage string, scope string, error error) {
 	if len(os.Args) <= 1 {
-		// commitType := GetCommitType()
+		commitType := GetCommitType()
 		scope := GetScope()
 		message := GetCommitMessage()
 
-		return message, scope, nil
+		return commitType, message, scope, nil
 	}
 
 	if ValidateArgs() == true {
-		fmt.Println("All Args are Correct!")
 		args := ListArgs()
 
+		var commitType string
 		var message string
 		var scope string
+
+		// TODO: Trim whitespaces | Docs(README.md ): Updated Melee
+		if v, ok := args["-t"]; ok {
+			commitType = v
+		}
+		if v, ok := args["--type"]; ok {
+			commitType = v
+		}
 
 		if v, ok := args["-m"]; ok {
 			message = v
@@ -35,9 +43,9 @@ func ParseCliArgs() (messsage string, scope string, error error) {
 			scope = v
 		}
 
-		return message, scope, nil
+		return commitType, message, scope, nil
 	}
-	return "", "", fmt.Errorf("Missing Arguments!") // TODO: Show what arguments need to be provided
+	return "", "", "", fmt.Errorf("Missing Arguments!") // TODO: Show what arguments need to be provided
 }
 
 func ValidateArgs() (result bool) {
