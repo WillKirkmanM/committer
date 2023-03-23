@@ -6,11 +6,11 @@ import (
 )
 
 func Commit() {
-	message, scope, err := ParseCliArgs()
+	commitType, message, scope, err := ParseCliArgs()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Scope & Message")
-	fmt.Println(scope, message)
+	fmt.Println("Formatted Message:")
+	fmt.Printf("%s(%s): %s\n", commitType, scope, message)
 }
