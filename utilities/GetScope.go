@@ -2,6 +2,7 @@ package utilities
 
 import (
 	"fmt"
+	"strings"
 )
 
 func GetScope() string {
@@ -10,6 +11,8 @@ func GetScope() string {
 	var scope string
 
 	fmt.Scanln(&scope)
+
+	scope = strings.TrimSpace(scope)
 
 	fmt.Print("\033[H\033[2J")
 
