@@ -11,6 +11,11 @@ func Commit() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Formatted Message:")
-	fmt.Printf("%s(%s): %s\n", commitType, scope, message)
+	commitMessage := fmt.Sprintf("%s(%s): %s\n", commitType, scope, message)
+	fmt.Println(commitMessage)
+
+	AddFile(scope)
+	GitCommit(message)
+	Confirm("push the files")
+	PushFile()
 }
