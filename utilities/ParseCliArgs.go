@@ -3,6 +3,7 @@ package utilities
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 func ParseCliArgs() (commitType string, messsage string, scope string, error error) {
@@ -21,12 +22,11 @@ func ParseCliArgs() (commitType string, messsage string, scope string, error err
 		var message string
 		var scope string
 
-		// TODO: Trim whitespaces | Docs(README.md ): Updated Melee
 		if v, ok := args["-t"]; ok {
-			commitType = v
+			commitType = strings.TrimSpace(v)
 		}
 		if v, ok := args["--type"]; ok {
-			commitType = v
+			commitType = strings.TrimSpace(v)
 		}
 
 		if v, ok := args["-m"]; ok {
@@ -37,10 +37,10 @@ func ParseCliArgs() (commitType string, messsage string, scope string, error err
 		}
 
 		if v, ok := args["-s"]; ok {
-			scope = v
+			scope = strings.TrimSpace(v)
 		}
 		if v, ok := args["--scope"]; ok {
-			scope = v
+			scope = strings.TrimSpace(v)
 		}
 
 		return commitType, message, scope, nil
@@ -53,7 +53,6 @@ func ValidateArgs() (result bool) {
 	hasScope := false
 
 	for key := range ListArgs() {
-
 		switch key {
 		case "-m":
 			hasMessage = true
@@ -65,7 +64,6 @@ func ValidateArgs() (result bool) {
 		case "--scope":
 			hasScope = true
 		}
-
 	}
 	return hasMessage == true && hasScope == true
 }
