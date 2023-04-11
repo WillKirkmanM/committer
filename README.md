@@ -9,13 +9,13 @@ To add a development build to the path. Make sure you have
 `export PATH=$PATH:~/.local/bin/`
 
 in your shell rc file.
-Once that is done, you can run the command:
+Once that is done, you can run the command to add the development binary to your path.:
 
 ```
 $ make path
 ```
 
-to add the development binary to your path.
+To remove the binary from your path, run this command:
 
 ```
 $ make cleanPath
