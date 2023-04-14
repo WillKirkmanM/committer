@@ -1,6 +1,7 @@
 # Committer
-
 ⭐Push Your Git Commit Messages to the Moon
+
+[![asciicast](https://asciinema.org/a/GeoloSaR4JFMcGHWZHveJmObB.svg)](https://asciinema.org/a/GeoloSaR4JFMcGHWZHveJmObB)
 
 ## Developing
 
